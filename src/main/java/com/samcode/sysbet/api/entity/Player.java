@@ -82,4 +82,11 @@ public class Player implements Serializable {
 		this.team = team;
 	}
 	
+	public void suspend() {
+		if(getQtdCartaoAmarelo() >= 3) {
+			setSuspended(true);
+			setQtdCartaoAmarelo(0);
+		}
+	}
+	
 }
