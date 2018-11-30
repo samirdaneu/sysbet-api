@@ -34,6 +34,11 @@ public class Player implements Serializable {
 	@ManyToOne
 	private Team team;
 
+	public Player() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}

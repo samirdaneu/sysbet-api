@@ -100,12 +100,26 @@ public class TeamController {
 	
 	@GetMapping(value = "{page}/{count}")
 	@PreAuthorize("hasAnyRole('CUSTOMER')")
-	public ResponseEntity<Response<Page<Team>>> findAll(HttpServletRequest request, @PathVariable("page") int page,
+	public ResponseEntity<Response<Page<Team>>> findAllPagination(HttpServletRequest request, @PathVariable("page") int page,
 			@PathVariable("count") int count) {
 		Response<Page<Team>> response = new Response<Page<Team>>();
 		Page<Team> teams = null;
 		teams = teamService.listTeams(page, count);
 		if (teams == null || teams.isEmpty()) {
+			response.getErrors().add("There is no team registered yet!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(teams);
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping
+	@PreAuthorize("hasAnyRole('CUSTOMER')")
+	public ResponseEntity<Response<Iterable<Team>>> findAll(HttpServletRequest request) {
+		Response<Iterable<Team>> response = new Response<Iterable<Team>>();
+		Iterable<Team> teams = null;
+		teams = teamService.findAll();
+		if (teams == null) {
 			response.getErrors().add("There is no team registered yet!");
 			return ResponseEntity.badRequest().body(response);
 		}
