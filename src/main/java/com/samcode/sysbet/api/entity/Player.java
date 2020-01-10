@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Player implements Serializable {
 
@@ -32,6 +34,7 @@ public class Player implements Serializable {
 	private Integer qtdCartaoVermelho;
 	
 	@ManyToOne
+	@JsonBackReference
 	private Team team;
 
 	public Player() {

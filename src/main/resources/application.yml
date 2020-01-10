@@ -1,0 +1,5 @@
+global:
+  parameters:  
+    comissionRate: 0.0638
+    scale: 1
+    reportPath: C:\\Users\\samys\\Documents\\apostas\\test_excel\\mofp_report.xls

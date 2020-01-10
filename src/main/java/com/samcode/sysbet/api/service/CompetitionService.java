@@ -19,5 +19,7 @@ public interface CompetitionService {
 	Page<Competition> findAll(int page, int count);
 	
 	Page<Competition> findByParameters(int page, int count, String name);
+	
+	Page<Competition> listCompetitions(int page, int count);
 
 }

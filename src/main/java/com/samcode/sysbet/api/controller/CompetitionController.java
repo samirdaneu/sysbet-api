@@ -140,5 +140,20 @@ public class CompetitionController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@GetMapping(value = "{page}/{count}")
+	@PreAuthorize("hasAnyRole('CUSTOMER')")
+	public ResponseEntity<Response<Page<Competition>>> findAllPagination(HttpServletRequest request, @PathVariable("page") int page,
+			@PathVariable("count") int count) {
+		Response<Page<Competition>> response = new Response<Page<Competition>>();
+		Page<Competition> competitions = null;
+		competitions = competitionService.listCompetitions(page, count);
+		if (competitions == null || competitions.isEmpty()) {
+			response.getErrors().add("There is no competition registered yet!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(competitions);
+		return ResponseEntity.ok(response);
+	}
+	
 
 }

@@ -45,4 +45,10 @@ public class CompetitionServiceImpl implements CompetitionService {
 		return this.competitionRepository.findByNameIgnoreCaseOrderByNameDesc(pages, name);
 	}
 
+	@Override
+	public Page<Competition> listCompetitions(int page, int count) {
+		Pageable pages = PageRequest.of(page, count);
+		return this.competitionRepository.findAll(pages);
+	}
+
 }

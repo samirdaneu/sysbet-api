@@ -12,6 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Team implements Serializable {
 
@@ -26,9 +29,11 @@ public class Team implements Serializable {
     private String name;
 	
 	@ManyToMany(mappedBy="teams")
+	@JsonBackReference
 	private List<Competition> competitions;
 	
 	@OneToMany(mappedBy="team")
+	@JsonManagedReference
 	private List<Player> players;
 
 	public Integer getId() {
